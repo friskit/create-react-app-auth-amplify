@@ -8,6 +8,7 @@ Amplify.configure(aws_exports);
 
 class App extends Component {
   render() {
+      Auth.currentUserInfo().then( data => console.log(data));
     return (
       <div className="App">
         <header className="App-header">
@@ -29,4 +30,15 @@ class App extends Component {
   }
 }
 
-export default withAuthenticator(App, true);
+export default withAuthenticator(
+    App,
+    true,
+    [],
+    null,
+    null,
+    {
+      hiddenDefaults: ["phone_number"],
+      signUpFields: [
+          { label: "Name", key: "name", required: true, type: "string" }
+      ]}
+);
